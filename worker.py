@@ -23,6 +23,13 @@ def test():
     #return "Test" # testing 
     return(get_api_key())
 
+@app.route("/identify")
+def identify():
+    hostname = os.uname()[1]
+    internal_ip = requests.get('http://whatismyip.akamai.com/').text
+    return f"Hostname: {hostname}, Internal IP: {internal_ip}"
+
+
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
