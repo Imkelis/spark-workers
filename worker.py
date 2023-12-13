@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 import requests
 import os
 import json
@@ -16,7 +17,7 @@ def get_api_key() -> str:
       
 @app.route("/")
 def hello():
-    return "Test3 Add workers to the Spark cluster with a POST request to add"
+    return "Test Final Add workers to the Spark cluster with a POST request to add"
 
 @app.route("/test")
 def test():
@@ -33,11 +34,28 @@ def identify():
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
-    return "Test3 Use post to add" # replace with form template
+    return "Test Final Use post to add" # replace with form template
   else:
     token=get_api_key()
     ret = addWorker(token,request.form['num'])
     return ret
+  
+  
+
+@app.route("/addmultiple", methods=['POST'])
+def add_multiple():
+    if request.method == 'POST':
+        token = get_api_key()
+        vm_ids = request.form['nums'].split(',')
+        responses = []
+        for num in vm_ids:
+            response = addWorker(token, num.strip())
+            responses.append({"vm_id": num, "response": response})
+        return jsonify(responses)
+    else:
+       return "Test Final Use post to add"
+       
+
 
 
 def addWorker(token, num):
