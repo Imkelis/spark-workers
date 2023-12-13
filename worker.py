@@ -26,7 +26,7 @@ def test():
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
-    return "Use test post to add" # replace with form template
+    return "Use post to add" # replace with form template
   else:
     token=get_api_key()
     ret = addWorker(token,request.form['num'])
