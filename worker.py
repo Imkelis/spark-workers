@@ -1,3 +1,4 @@
+import secrets
 from flask import Flask
 from flask import request
 import requests
@@ -26,7 +27,7 @@ def test():
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
-    return "Use post to add" # replace with form template
+    return "Use post to add" + get_api_key() # replace with form template
   else:
     token=get_api_key()
     ret = addWorker(token,request.form['num'])
