@@ -1,4 +1,3 @@
-import secrets
 from flask import Flask
 from flask import request
 import requests
@@ -17,7 +16,7 @@ def get_api_key() -> str:
       
 @app.route("/")
 def hello():
-    return "Add workers to the Spark cluster with a POST request to add"
+    return "Test2 Add workers to the Spark cluster with a POST request to add"
 
 @app.route("/test")
 def test():
@@ -27,7 +26,7 @@ def test():
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
-    return "Use post to add" + get_api_key() # replace with form template
+    return "Test2 Use post to add" # replace with form template
   else:
     token=get_api_key()
     ret = addWorker(token,request.form['num'])
